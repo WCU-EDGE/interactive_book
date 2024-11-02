@@ -8,10 +8,15 @@ ENV SPARK_MASTER_PORT=7077
 ENV SPARK_MASTER_WEBUI_PORT=8080
 ENV SPARK_MASTER_LOG=/spark/logs
 
-RUN dnf install -y python3 && \
+RUN dnf update -y && \
+    dnf install -y python3 curl nano && \
     dnf clean all && \
-    pip install jupyter numpy pandas nltk jupyter-book
+    pip install jupyter numpy pandas nltk jupyter-book && \
+    curl -fsSL https://code-server.dev/install.sh | sh
 
-EXPOSE 8080
+#8080: jupyter
+#8088: vscode-server
+
+EXPOSE 8080 8088
 
 CMD ["/bin/bash", "/start-master.sh"]
