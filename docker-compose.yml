@@ -1,0 +1,34 @@
+services:
+  master:
+    image: master:latest
+    ports:
+      - "9090:8080"
+      - "7077:7077"
+      - "8888:8888"
+      - "4040:4040"
+      - "5001:5001"
+    volumes:
+       - ./apps:/spark-apps
+    environment:
+      - "SPARK_LOCAL_IP=spark-master"
+  worker:
+    image: worker:latest
+    ports:
+      - "8081"
+    depends_on:
+      - master
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_DRIVER_MEMORY=128m
+      - SPARK_EXECUTOR_MEMORY=256m
+    volumes:
+       - ./apps:/spark-apps
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  17.18.0.0/16
