@@ -14,9 +14,9 @@ RUN dnf update -y && \
     pip install jupyter numpy pandas nltk jupyter-book && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
-#8080: jupyter
+#8888: jupyter
 #8088: vscode-server
 
-EXPOSE 8080 8088
+EXPOSE 8888 8088
 
 CMD ["/bin/bash", "/start-master.sh"]
