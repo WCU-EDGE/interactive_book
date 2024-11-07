@@ -1,4 +1,4 @@
-FROM node:22.11.0-slim
+FROM rockylinux:9.3-minimal
 
 USER root
 
@@ -8,11 +8,14 @@ ENV SPARK_MASTER_PORT=7077
 ENV SPARK_MASTER_WEBUI_PORT=8080
 ENV SPARK_MASTER_LOG=/spark/logs
 
-RUN apt update && \
-    apt install -y curl && \
+RUN dnf update -y && \
+    dnf install -y python3 curl nano && \
+    dnf clean all && \
+    pip install jupyter numpy pandas nltk jupyter-book && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
+# 8888: jupyter
 # 8088: vscode-server
-EXPOSE 8088
+EXPOSE 8888 8088
 
 CMD ["/bin/bash", "/start-master.sh"]
