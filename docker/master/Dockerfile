@@ -7,16 +7,17 @@ ENV PIP_ROOT_USER_ACTION=ignore
 COPY code-server/config.yaml /
 COPY start-master.sh /
 
-RUN dnf update -y && \
-    dnf install -y python3-full curl nano && \
+RUN microdnf update -y && \
+    microdnf install -y python3 python3-pip curl nano && \
+    pip install numpy pandas nltk matplotlib scikit-learn && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     mkdir -p /root/.config/code-server/ && \
     cp /config.yaml /root/.config/code-server/config.yaml && \
-    dnf clean all
+    microdnf clean all
 
 # setup Python packages
-RUN pip3 install jupyter numpy pandas nltk jupyter-book && \
-    pip3 install mkdocs-material markdown-include mkdocs-table-reader-plugin mkdocs-jupyter &&\
+RUN pip3 install jupyter jupyter-book && \
+    pip3 install mkdocs-material markdown-include mkdocs-table-reader-plugin mkdocs-jupyter
 
 # 8888: jupyter
 # 8088: vscode-server
