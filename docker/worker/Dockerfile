@@ -1,4 +1,4 @@
-FROM rockylinux:9.3-minimal
+FROM rockylinux:9.3
 
 USER root
 
