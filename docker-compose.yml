@@ -18,7 +18,3 @@ services:
 networks:
   default:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet:  17.18.0.0/16
