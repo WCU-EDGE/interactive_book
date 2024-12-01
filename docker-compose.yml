@@ -1,6 +1,6 @@
 services:
   master:
-    image: master:latest
+    image: book-master:latest
     ports:
       - "8888:8888"
       - "8088:8088"
@@ -10,7 +10,7 @@ services:
       - ../csc467data:/data
       
   worker:
-    image: worker:latest
+    image: book-worker:latest
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ../csc467data:/data
