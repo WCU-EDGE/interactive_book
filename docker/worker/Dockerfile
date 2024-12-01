@@ -6,6 +6,6 @@ COPY start-worker.sh /
 
 RUN dnf install -y python3 && \
     dnf clean all && \
-    pip install numpy pandas nltk
+    pip install numpy pandas nltk matplotlib scikit-learn
 
 CMD ["/bin/bash", "/start-worker.sh"]
