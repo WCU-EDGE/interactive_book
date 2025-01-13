@@ -1,4 +1,6 @@
 services:
+  base:
+    image: book-base:latest
   master:
     image: book-master:latest
     ports:
@@ -6,15 +8,24 @@ services:
       - "8088:8088"
       - "8000:8000"
     volumes:
+      - home:/home
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ../csc467data:/data
+    depends_on:
+      - base
       
   worker:
     image: book-worker:latest
     volumes:
+      - home:/home
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ../csc467data:/data
+    depends_on:
+      - base
       
 networks:
   default:
     driver: bridge
+
+volumes:
+  home:
