@@ -1,15 +1,11 @@
 #!/bin/bash
 
-env PIP_ROOT_USER_ACTION=ignore
+# setup code server
+sudo sh /home/student/build/code-server.sh --prefix=/usr/local/
 
-pip3 install jupyter jupyter-book && \
-    pip3 install mkdocs-material markdown-include mkdocs-table-reader-plugin mkdocs-jupyter
+# setup Python packages
+source /opt/env/python3/bin/activate
+sudo pip install jupyter jupyter-book mkdocs-material markdown-include mkdocs-table-reader-plugin mkdocs-glightbox mkdocs-jupyter  
 
-curl -fsSL https://code-server.dev/install.sh | sh
-
-mkdir -p /root/.config/code-server/ && \
-    cp /code-server/config.yaml /root/.config/code-server/config.yaml && \
-    mkdir -p /root/.local/share/code-server/User/ && \
-    cp /code-server/settings.json /root/.local/share/code-server/User/ && \
-    rm -Rf code-server
-
+sudo cp /home/student/build/entrypoint.sh /usr/local/bin/entrypoint.sh
+sudo chmod 755 /usr/local/bin/entrypoint.sh
