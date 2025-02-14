@@ -6,7 +6,7 @@ services:
         - "interactive_book:base"
     image: interactive_book:base
     
-  bookshelves:
+  bookcase:
     build:
       context: ./docker/bookcase
       tags:
