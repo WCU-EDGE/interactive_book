@@ -19,7 +19,7 @@ services:
       - "18000:8000"
       - "2222:22"
     volumes:
-      - home:/home
+      - - ./home:/home
       - ../bookcase:/bookcase # courses is a github repo containing lecture materials
     expose:
       - "22"
@@ -32,7 +32,7 @@ services:
     init: true
     image: interactive_book:base
     volumes:
-      - home:/home
+      - - ./home:/home
       - ../bookcase:/bookcase # courses is a github repo containing lecture materials
     expose:
       - "22"
@@ -49,6 +49,3 @@ networks:
   compute:
     name: compute
     driver: bridge
-
-volumes:
-  home:
