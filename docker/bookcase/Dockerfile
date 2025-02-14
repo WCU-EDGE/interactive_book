@@ -1,20 +1,13 @@
 # FROM rockylinux:9.3-minimal
-FROM interactive_book:base
+FROM --platform=linux/amd64 interactive_book:base AS stage-amd64
 
-USER root
+FROM --platform=linux/arm64 interactive_book:base AS stage-arm64
 
-ENV PIP_ROOT_USER_ACTION=ignore
+ARG TARGETARCH
 
-COPY code-server/ /code-server
-COPY start-master.sh /
-COPY mkdocs/setup_mkdocs.sh /
-COPY install.sh /
+FROM stage-${TARGETARCH} AS final
+USER student
 
-RUN /install.sh && rm /install.sh
-
-# 8888: jupyter
-# 8088: vscode-server
-# 8000: mkdocs serve
-EXPOSE 8888 8088 8000
-
-CMD ["/bin/bash", "/start-master.sh"]
+COPY . /home/student/build
+RUN sudo chmod -R 755 /home/student/build/*.sh && /home/student/build/install.sh && sudo rm -rf /home/student/build
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
