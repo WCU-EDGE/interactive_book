@@ -14,15 +14,18 @@ services:
     init: true
     image: bookcase:latest
     ports:
-      - "18888:8888"
-      - "18088:8088"
-      - "18000:8000"
+      - "18088:8088" # code-server
+      - "18000:8000" # spare
+      - "30003:3000" # standard nodejs
       - "2222:22"
     volumes:
       - ./home:/home
       - ../my-book-shelves:/my-book-shelves # This is a github repo containing lecture materials
     expose:
       - "22"
+      - "3000"
+      - "8088"
+      - "8000"
     hostname: bookcase
     container_name: bookcase
     networks:
