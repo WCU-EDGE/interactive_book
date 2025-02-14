@@ -37,7 +37,8 @@ microdnf install -y \
     python3-devel \
     tar \
     perl \
-    zlib-devel
+    zlib-devel \
+    nodejs
 
 #------------------------
 # Generate ssh host keys
