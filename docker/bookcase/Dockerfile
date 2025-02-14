@@ -1,5 +1,5 @@
 # FROM rockylinux:9.3-minimal
-FROM book-base:latest
+FROM interactive_book:base
 
 USER root
 
