@@ -1,9 +1,13 @@
-FROM rockylinux:9.3-minimal
+FROM --platform=linux/amd64 rockylinux:9.3-minimal AS stage-amd64
+
+FROM --platform=linux/arm64/v8 rockylinux:9.3-minimal AS stage-arm64
+
+ARG TARGETARCH
+
+FROM stage-${TARGETARCH} AS final
 
 USER root
 
-COPY install.sh /
-
-RUN /install.sh && rm /install.sh
-
-EXPOSE 22
+COPY . /build
+RUN chmod -R 755 /build/*.sh && /build/install.sh && rm -rf /build
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
