@@ -20,7 +20,7 @@ services:
       - "2222:22"
     volumes:
       - ./home:/home
-      - ../bookcase:/bookcase # courses is a github repo containing lecture materials
+      - ../my-book-shelves:/my-book-shelves # This is a github repo containing lecture materials
     expose:
       - "22"
     hostname: bookcase
