@@ -59,7 +59,7 @@ sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes
 python3 -m venv /opt/env/python3
 source /opt/env/python3/bin/activate
 env PIP_ROOT_USER_ACTION=ignore
-pip install numpy matplotlib pandas nltk scikit-learn ipykernel
+pip install numpy matplotlib pandas nltk scikit-learn ipykernel mystmd
 python -m ipykernel install --user --name=bookcase --display-name "Python (bookcase)"
 
 #------------------------
