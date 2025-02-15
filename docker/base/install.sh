@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 log_info() {
   printf "\n\e[0;35m $1\e[0m\n\n"
