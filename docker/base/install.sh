@@ -17,8 +17,8 @@ source /build/base.config
 # Install base image packages
 #------------------------
 
-microdnf update -y
-microdnf install -y \
+dnf update -y
+dnf install -y \
     openssh-server \
     openssh-clients \
     sudo \
@@ -38,6 +38,9 @@ microdnf install -y \
     tar \
     perl \
     zlib-devel
+
+dnf module -y enable nodejs:20
+dnf module -y install nodejs:20/common
 
 #------------------------
 # Generate ssh host keys
@@ -60,7 +63,7 @@ python3 -m venv /opt/env/python3
 source /opt/env/python3/bin/activate
 env PIP_ROOT_USER_ACTION=ignore
 pip install numpy matplotlib pandas nltk scikit-learn ipykernel mystmd
-python -m ipykernel install --user --name=bookcase --display-name "Python (bookcase)"
+python -m ipykernel install --name=bookcase --display-name "Python (bookcase)"
 
 #------------------------
 # Setup user accounts
@@ -113,7 +116,7 @@ openssl x509 -req -CA /etc/pki/tls/ca.crt -CAkey /etc/pki/tls/ca.key -CAcreatese
 cp /etc/pki/tls/ca.crt /etc/pki/ca-trust/source/anchors/
 update-ca-trust extract
 
-microdnf clean all
+dnf clean all
 rm -rf /var/cache/dnf
 
 cp /build/entrypoint.sh /usr/local/bin/entrypoint.sh
