@@ -28,6 +28,7 @@ dnf install -y \
     openldap-clients \
     sssd \
     sssd-tools \
+    sudo \
     authselect \
     openssl \
     bash-completion \
