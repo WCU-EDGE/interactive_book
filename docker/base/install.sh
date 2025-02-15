@@ -62,7 +62,6 @@ env PIP_ROOT_USER_ACTION=ignore
 pip install numpy matplotlib pandas nltk scikit-learn ipykernel
 python -m ipykernel install --user --name=bookcase --display-name "Python (bookcase)"
 
-
 #------------------------
 # Setup user accounts
 #------------------------
